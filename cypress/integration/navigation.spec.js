@@ -19,6 +19,19 @@ describe('Navigation', () => {
         // The new url should include "/home"
         cy.url().should('include', '/home')
       })
+      
+    it('should stay to login page when login failed', () => {
+      // Start from the home page
+      cy.visit('http://localhost:3000')
+
+      // Connexion
+      cy.get('[name="identifiant"]').type('greg').blur()
+      cy.get('[name="password"]').type('password').blur()
+      cy.get('form').submit()
+
+      // The new url should include "/home"
+      cy.url().should('include', '/')
+    })
       it('should navigate to all page and logout', () => {
         // Start from the home page
         cy.visit('http://localhost:3000')
